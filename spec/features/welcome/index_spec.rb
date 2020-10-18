@@ -7,29 +7,26 @@ RSpec.describe 'Welcome Index' do
     end
 
     it "can select Tennessee from the form" do
-      dropdown = all('select').first
-      select('Tennessee', from: dropdown)
+      select('Tennessee', from: :state)
       expect(page).to have_select(:state, selected: 'Tennessee')
+
     end
 
     it "can click on Find Parks button" do
-      dropdown = all('select').first
-      select('Tennessee', from: dropdown)
+      select('Tennessee', from: :state)
 
       click_button "Find Parks"
     end
 
     it "can see total number of parks found after click" do
-      dropdown = all('select').first
-      select('Tennessee', from: dropdown)
+      select('Tennessee', from: :state)
       click_button "Find Parks"
 
       expect(page).to have_content("Number of Parks: 98123")
     end
 
     it "can see info about each park after click" do
-      dropdown = all('select').first
-      select('Tennessee', from: dropdown)
+      select('Tennessee', from: :state)
       click_button "Find Parks"
 
       expect(page).to have_content("Name of Park")

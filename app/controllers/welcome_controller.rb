@@ -1,5 +1,6 @@
 class WelcomeController < ApplicationController
   def index
-    @parks_info = SearchFacade.find_parks_info(params[:state])
+    @state_params = params[:state]
+    @parks_info = SearchFacade.find_parks_info(@state_params )
   end
 end

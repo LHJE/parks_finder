@@ -8,26 +8,28 @@
         <div class="form-group search-field">
           <%= select_tag :state, options_for_select(us_states) %>
           <%= submit_tag "Find Parks", class: "btn btn-primary" %><br><br>
-          <% if !@state_params.nil? %>
-            <% if !@parks_info.nil? %>
-              Number of Parks: <%= @parks_info.total %><br><br>
-              <% @parks_info.data.each do |park| %>
-                <section class='park' id='park-<%= park[:id] %>'>
-                  <%= park[:fullName] %><br><br>
-                  <% if !park[:operatingHours][0].nil? %>
-                    Hours: <br>
-                    <% park[:operatingHours][0][:standardHours].each do |day, hours| %>
-                      <%= day.to_s.capitalize %>: <%= hours %>
-                    <% end %><br><br>
-                  <% end %>
-                  Directions: <br><%= park[:directionsInfo] %><br><br>
-                  Description: <br><%= park[:description] %><br><br><br><br>
-                </section>
-              <% end %>
-            <% end %>
-          <% end %>
         </div>
       <% end %>
     </ul>
   </div>
 </nav>
+<% if !@state_params.nil? %>
+  <% if !@parks_info.nil? %>
+  <h1>  Number of Parks: <%= @parks_info.total %><br></h1>
+    <% @parks_info.data.each do |park| %>
+      <section class='park' id='park-<%= park[:id] %>'>
+      <h2> <%= park[:fullName] %> </h2>
+        <% if !park[:operatingHours][0].nil? %>
+          <h3>Hours:</h3>
+          <% park[:operatingHours][0][:standardHours].each do |day, hours| %>
+          <p>  <%= day.to_s.capitalize %>: <%= hours %></p>
+          <% end %>
+        <% end %>
+        <h3> Directions: </h3>
+        <p><%= park[:directionsInfo] %></p>
+        <h3> Description:</h3>
+        <p><%= park[:description] %></p><br>
+      </section>
+    <% end %>
+  <% end %>
+<% end %>
